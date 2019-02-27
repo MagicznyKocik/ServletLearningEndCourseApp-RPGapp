@@ -43,10 +43,10 @@
 
 <div class="container">
     <div class="col-sm-6 col-md-4 col-md-offset-4">
-        <form class="form-signin" method="post" action="#">
+        <form class="form-signin" method="post" action="register">
             <h2 class="form-signin-heading">Zarejestruj się</h2>
             <input name="inputEmail" type="email" class="form-control" placeholder="Email" required autofocus />
-            <input name="inputUsername" type="text" name="inputUsername" class="form-control" placeholder="Nazwa użytkownika" required autofocus />
+            <input name="inputUsername" type="text" class="form-control" placeholder="Nazwa użytkownika" required autofocus />
             <input name="inputPassword" type="password" class="form-control" placeholder="Hasło" required />
             <button class="btn btn-lg btn-primary btn-block" type="submit" >Zarejestruj</button>
         </form>

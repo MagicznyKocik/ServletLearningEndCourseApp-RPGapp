@@ -1,7 +1,9 @@
 package pl.adamLupinski.ServletLearninng.RPGApp.model;
 
+import java.util.Objects;
+
 public class User {
-    private long id;
+    private Long id;
     private String username;
     private String email;
     private String password;
@@ -11,8 +13,21 @@ public class User {
 
     }
 
-    public User(long id, String username, String email, String password, boolean active) {
+    public User(Long id, String username, String email, String password) {
         this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(User user) {
+        this.id = user.id;
+        this.username = user.username;
+        this.email = user.email;
+        this.password = user.password;
+    }
+
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -22,7 +37,7 @@ public class User {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -77,9 +92,9 @@ public class User {
 
         User user = (User) o;
 
-        if (id != user.id) return false;
+        if (!id.equals(user.id)) return false;
         if (active != user.active) return false;
-        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (!Objects.equals(username, user.username)) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         return password != null ? password.equals(user.password) : user.password == null;
     }

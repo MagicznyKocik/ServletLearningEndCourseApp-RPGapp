@@ -9,8 +9,8 @@
         maxIdle="30"
         maxWaitMillis="10000"
         username="Mkocik"
-        password="micro$p4c3s"
-        driverClassName="com.mysql.jdbc.Driver"
+        password="micro$p4c3S"
+        driverClassName="com.mysql.cj.jdbc.Driver"
         url="jdbc:mysql://localhost:3306/servlet_app_db?useSSL=false&amp;serverTimezone=UTC" />
 
     <Realm
