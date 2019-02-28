@@ -28,6 +28,17 @@ public class Idea {
         this.downVote = downVote;
     }
 
+    public Idea(Idea idea){
+        this.id = idea.id;
+        this.name = idea.name;
+        this.description = idea.description;
+        this.url = idea.url;
+        this.timestamp = idea.timestamp;
+        this.user = idea.user;
+        this.upVote = idea.upVote;
+        this.downVote = idea.downVote;
+    }
+
     public long getId() {
         return id;
     }
