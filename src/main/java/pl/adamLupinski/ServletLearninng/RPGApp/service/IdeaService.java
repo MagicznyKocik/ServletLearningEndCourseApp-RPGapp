@@ -7,7 +7,9 @@ import pl.adamLupinski.ServletLearninng.RPGApp.model.User;
 
 
 import java.sql.Timestamp;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 public class IdeaService {
 
@@ -30,6 +32,20 @@ public class IdeaService {
         idea.setTimestamp(timestamp);
         return idea;
 
+    }
+
+    public List<Idea> getAllIdeas(){
+        return getAllIdeas(null);
+    }
+
+    public List<Idea> getAllIdeas(Comparator<Idea> comparator){
+        DAOFactory factory = DAOFactory.getDAOFactory();
+        IdeaDAO ideaDAO = factory.getIdeaDAO();
+        List<Idea> ideas = ideaDAO.getAll();
+        if (comparator != null && ideas != null){
+            ideas.sort(comparator);
+        }
+        return ideas;
     }
 
 }

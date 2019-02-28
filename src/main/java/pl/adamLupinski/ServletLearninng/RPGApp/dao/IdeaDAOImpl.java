@@ -1,13 +1,17 @@
 package pl.adamLupinski.ServletLearninng.RPGApp.dao;
 
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import pl.adamLupinski.ServletLearninng.RPGApp.model.Idea;
+import pl.adamLupinski.ServletLearninng.RPGApp.model.User;
 import pl.adamLupinski.ServletLearninng.RPGApp.util.ConnectionProvider;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +21,9 @@ public class IdeaDAOImpl implements IdeaDAO {
 
     private static final String CREATE_IDEA = "insert into idea(name, description, url, user_id, date, up_vote, down_vote) " +
             "values(:name, :description, :url, :user_id, :date, :up_vote, :down_vote);";
+
+    private static final String READ_ALL_IDEAS = "select user.user_id, username, email, is_active, password, idea_id, name, description, url, date, up_vote, down_vote " +
+            "from idea left join user on idea.user_id = user.user_id;";
 
     private NamedParameterJdbcTemplate template;
 
@@ -62,6 +69,31 @@ public class IdeaDAOImpl implements IdeaDAO {
 
     @Override
     public List<Idea> getAll() {
-        return null;
+        List<Idea> ideas = template.query(READ_ALL_IDEAS, new IdeaRowMapper());
+        return ideas;
     }
+
+    private class IdeaRowMapper implements RowMapper<Idea> {
+        @Override
+        public Idea mapRow(ResultSet resultSet, int row) throws SQLException {
+            Idea idea = new Idea();
+            idea.setId(resultSet.getLong("idea_id"));
+            idea.setName(resultSet.getString("name"));
+            idea.setDescription(resultSet.getString("description"));
+            idea.setUrl(resultSet.getString("url"));
+            idea.setUpVote(resultSet.getInt("up_vote"));
+            idea.setDownVote(resultSet.getInt("down_vote"));
+            idea.setTimestamp(resultSet.getTimestamp("date"));
+            User user = new User();
+            user.setId(resultSet.getLong("user_id"));
+            user.setUsername(resultSet.getString("username"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPassword(resultSet.getString("password"));
+            idea.setUser(user);
+            return idea;
+        }
+
+    }
+
 }
+
