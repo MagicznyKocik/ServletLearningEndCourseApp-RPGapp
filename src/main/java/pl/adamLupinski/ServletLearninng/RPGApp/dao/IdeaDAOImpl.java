@@ -25,6 +25,13 @@ public class IdeaDAOImpl implements IdeaDAO {
     private static final String READ_ALL_IDEAS = "select user.user_id, username, email, is_active, password, idea_id, name, description, url, date, up_vote, down_vote " +
             "from idea left join user on idea.user_id = user.user_id;";
 
+    private static final String READ_IDEA = "select user.user_id, username, email, is_active, password, idea_id, name, description, url, date, up_vote, down_vote " +
+            "from idea left join user on idea.user_id=user.user_id WHERE idea_id=:idea_id;";
+    private static final String UPDATE_IDEA =
+            "UPDATE idea SET name=:name, description=:description, url=:url, user_id=:user_id, date=:date, up_vote=:up_vote, down_vote=:down_vote "
+                    + "WHERE idea_id=:idea_id;";
+
+
     private NamedParameterJdbcTemplate template;
 
     public IdeaDAOImpl() {
@@ -54,12 +61,29 @@ public class IdeaDAOImpl implements IdeaDAO {
 
     @Override
     public Idea read(Long primaryKey) {
-        return null;
+        SqlParameterSource parameterSource = new MapSqlParameterSource("idea_id", primaryKey);
+        Idea idea = template.queryForObject(READ_IDEA, parameterSource, new IdeaRowMapper());
+        return idea;
     }
 
     @Override
-    public boolean update(Idea updateObject) {
-        return false;
+    public boolean update(Idea idea) {
+        boolean result = false;
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("idea_id", idea.getId());
+        paramMap.put("name", idea.getName());
+        paramMap.put("description", idea.getDescription());
+        paramMap.put("url", idea.getUrl());
+        paramMap.put("user_id", idea.getUser().getId());
+        paramMap.put("date", idea.getTimestamp());
+        paramMap.put("up_vote", idea.getUpVote());
+        paramMap.put("down_vote", idea.getDownVote());
+        SqlParameterSource paramSource = new MapSqlParameterSource(paramMap);
+        int update = template.update(UPDATE_IDEA, paramSource);
+        if(update > 0) {
+            result = true;
+        }
+        return result;
     }
 
     @Override

@@ -5,11 +5,11 @@
   Time: 17:17
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page isELIgnored="false"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,24 +22,7 @@
 
 <body>
 
-<nav class = "navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <a href="#" class="navbar-brand">RPG Site</a>
-
-        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-            <span class="glyphicon glyphicon-list"></span>
-        </button>
-
-        <div class="collapse navbar-collapse navHeaderCollapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#">Główna</a></li>
-                <li><a href="#">Dodaj</a></li>
-                <li><a href="#">Zaloguj się</a></li>
-            </ul>
-        </div>
-
-    </div>
-</nav>
+<jsp:include page="fragments/navbar.jspf"/>
 
 <div class="container">
     <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -53,11 +36,7 @@
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="navbar-text">RPG Site</p>
-    </div>
-</footer>
+<jsp:include page="fragments/footer.jspf"/>
 
 
 </body>

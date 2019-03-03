@@ -22,24 +22,7 @@
 
 <body>
 
-<nav class = "navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <a href="#" class="navbar-brand">RPG Site</a>
-
-        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-            <span class="glyphicon glyphicon-list"></span>
-        </button>
-
-        <div class="collapse navbar-collapse navHeaderCollapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#">Główna</a></li>
-                <li><a href="#">Dodaj</a></li>
-                <li><a href="#">Zaloguj się</a></li>
-            </ul>
-        </div>
-
-    </div>
-</nav>
+<jsp:include page="fragments/navbar.jspf"/>
 
 
 <div class="container">
@@ -54,11 +37,7 @@
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="navbar-text">RPG Site</p>
-    </div>
-</footer>
 
+<jsp:include page="fragments/footer.jspf"/>
 </body>
 </html>

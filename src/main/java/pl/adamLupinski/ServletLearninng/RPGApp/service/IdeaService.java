@@ -34,6 +34,20 @@ public class IdeaService {
 
     }
 
+    public Idea getIdeaById(long ideaId){
+        DAOFactory factory =  DAOFactory.getDAOFactory();
+        IdeaDAO ideaDAO = factory.getIdeaDAO();
+        Idea idea = ideaDAO.read(ideaId);
+        return idea;
+    }
+
+    public boolean updateIdea(Idea idea){
+        DAOFactory factory =  DAOFactory.getDAOFactory();
+        IdeaDAO ideaDAO = factory.getIdeaDAO();
+        boolean update = ideaDAO.update(idea);
+        return update;
+    }
+
     public List<Idea> getAllIdeas(){
         return getAllIdeas(null);
     }

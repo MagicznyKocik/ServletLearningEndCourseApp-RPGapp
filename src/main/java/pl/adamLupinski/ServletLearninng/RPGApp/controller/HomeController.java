@@ -19,25 +19,22 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         saveIdeasInRequest(req);
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
     }
 
     private void saveIdeasInRequest(HttpServletRequest request){
         IdeaService ideaService = new IdeaService();
-        List<Idea> allIdeas = ideaService.getAllIdeas(new Comparator<Idea>() {
-//            więcej głosów wyżej na liscie
-            @Override
-            public int compare(Idea o1, Idea o2) {
-                int o1Vote = o1.getUpVote() - o1.getDownVote();
-                int o2Vote = o2.getUpVote() - o2.getDownVote();
-                if (o1Vote < o2Vote){
-                    return 1;
-                } else if (o1Vote > o2Vote){
-                    return -1;
-                }
-                return 0;
-            }
-        });
+        //            więcej głosów wyżej na liscie
+        List<Idea> allIdeas = ideaService.getAllIdeas((o1, o2) -> {
+                        int o1Vote = o1.getUpVote() - o1.getDownVote();
+                        int o2Vote = o2.getUpVote() - o2.getDownVote();
+                        if (o1Vote < o2Vote){
+                            return 1;
+                        } else if (o1Vote > o2Vote){
+                            return -1;
+                        }
+                        return 0;
+                    });
         request.setAttribute("ideas", allIdeas);
     }
 }

@@ -22,31 +22,8 @@
 
 <body>
 
-<nav class = "navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <a href="#" class="navbar-brand">RPG SITE</a>
 
-        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-            <span class="glyphicon glyphicon-list"></span>
-        </button>
-
-        <div class="collapse navbar-collapse navHeaderCollapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#">Główna</a></li>
-                <li><a href="add">Dodaj</a></li>
-                <c:choose>
-                    <c:when test="${not empty sessionScope.user}">
-                        <li><a href="logout"> Wyloguj </a> </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li><a href="login"> Zaloguj </a> </li>
-                    </c:otherwise>
-                </c:choose>
-            </ul>
-        </div>
-
-    </div>
-</nav>
+<jsp:include page="fragments/navbar.jspf"/>
 
 <div class="container">
     <div class="col-md-8 col-md-offset-2">
@@ -64,12 +41,7 @@
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="navbar-text">RPG Site</p>
-    </div>
-</footer>
-
+<jsp:include page="fragments/footer.jspf"/>
 
 </body>
 </html>

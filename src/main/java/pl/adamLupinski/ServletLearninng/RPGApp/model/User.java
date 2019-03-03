@@ -27,11 +27,7 @@ public class User {
         this.password = user.password;
     }
 
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
+
 
     public long getId() {
         return id;
